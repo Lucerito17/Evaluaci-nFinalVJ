@@ -1,0 +1,92 @@
+﻿@model IEnumerable<GAMMAFEST.Models.RegistroAsistencia>
+
+@{
+    ViewData["Title"] = "ListarEventos";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Listado de Eventos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <!--<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/dist/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+
+                <div style="position: relative;
+  top: -100px;">
+                    <a type="button" class="btn btn-dark" asp-controller="Evento" asp-action="CrearEvento" asp-route-Id="@ViewBag.id">Agregar un Nuevo Evento</a>
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th id="ticket">
+                                    # de Ticket
+                                </th>
+                                <th id="usuario">
+                                    Nombre de Usuario
+                                </th>
+                                <th id="usuario">
+                                    Email de Usuario
+                                </th>
+                                <th id="evento">
+                                    Nombre del Evento
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var usuarios = ViewBag.usuarios as List<GAMMAFEST.Models.UserPromotor>;
+                                var contador = 0;
+                            }
+                                @foreach (var item in Model)
+                                {
+                                @if (contador >= usuarios.Count())
+                                {
+                                    contador = 0;
+                                }
+                                    <tr>
+                                        <td>
+                                            @item.Entrada.EntradaId
+                                        </td>
+                                        <td>
+                                        @usuarios[contador].Nombre
+                                    </td>
+                                    <td>
+                                        @usuarios[contador].Email
+                                    </td>
+                                    <td>
+                                        @ViewBag.evento
+                                    </td>
+                                </tr>
+                                contador++;
+                            }
+                                
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
